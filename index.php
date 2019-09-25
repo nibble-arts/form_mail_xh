@@ -117,8 +117,7 @@ function form_mail($form="", $template="") {
 			];
 		}
 
-
-		$sender = new FormMailSender($settings["sender"]);
+		$sender = new FormMailSender($settings["sender"], $form);
 		$sender->set_key_names(["Frage","Antwort"]);
 		$sender->add_data($_POST);
 

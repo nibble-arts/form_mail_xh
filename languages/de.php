@@ -9,8 +9,8 @@ $plugin_tx['form_mail']['fail_fileread']="File \"%s\" konnte nicht gelesen werde
 $plugin_tx['form_mail']['fail_filewrite']="File \"%s\" konnte nicht gespeichert werden";
 $plugin_tx['form_mail']['fail_fileexists']="File \"%s\" existiert schon";
 
-$plugin_tx['form_mail']['mail_sent']="Die E-Mail wurde erfolgreich versandt. Vielen Dank für die Teilnahme";
-$plugin_tx['form_mail']['mail_sent_fail']="Fehler beim Versender der E-Mail.";
+$plugin_tx['form_mail']['mail_sent']="Die Daten wurden erfolgreich gespeichert. Für eine neue Bewertung, nutzen Sie den unten stehenden Link.";
+$plugin_tx['form_mail']['mail_sent_fail']="Fehler beim speichern der Daten.";
 
 $plugin_tx['form_mail']['menu_main']="Formulare";
 $plugin_tx['form_mail']['title_settings']="Abfrageeinstellungen";
