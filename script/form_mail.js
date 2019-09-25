@@ -110,6 +110,15 @@ function form_mail_init() {
 			}
 			form_mail_check_submit();
 		});
+
+
+
+	jQuery('select[name="filmblock"]')
+
+		.change(function (e) {
+
+console.log(this);
+		});
 }
 
 

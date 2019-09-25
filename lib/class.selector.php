@@ -38,8 +38,8 @@ class Form_Mail_Selector {
 
 		$ret .= "<select name=" . $name . ">";
 
-		foreach ($opt as $entry) {
-			$ret .= "<option>" . $entry . "</option>";
+		foreach ($opt as $idx => $entry) {
+			$ret .= '<option value="' . $idx . '">' . $entry . '</option>';
 		}
 
 		$ret .= "</select>";
