@@ -22,6 +22,7 @@ define("FORM_MAIL_SENT_FAIL", $plugin_tx["form_mail"]["mail_sent_fail"]);
 
 include_once FORM_MAIL_BASE . "lib/class.block.php";
 include_once FORM_MAIL_BASE . "lib/class.sender.php";
+include_once FORM_MAIL_BASE . "lib/class.selector.php";
 
 
 
@@ -55,11 +56,15 @@ function form_mail($form="", $template="") {
 	$ret .= '<form method="post">';
 
 	// create form definition path
-	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form . ".ini";
+	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
 
-	if (file_exists($path)) {
+	if (file_exists($path . ".ini")) {
 
-		$form_ini = parse_ini_file($path, true);
+		$selector = new Form_Mail_selector($path);
+		$ret .= $selector->render();
+
+		// load form definition
+		$form_ini = parse_ini_file($path . ".ini", true);
 
 		$formid = false;
 
