@@ -67,7 +67,6 @@ function form_mail($form="", $function="") {
 			// admin
 			case "administration":
 				Admin::fetch($path);
-
 				$ret .= Admin::render($form);
 				break;
 
@@ -76,7 +75,7 @@ function form_mail($form="", $function="") {
 			default:
 
 				$selector = new Form_Mail_selector($path);
-				// $ret .= $selector->render();
+				$ret .= $selector->render("titel");
 
 				// load form definition
 				$form_ini = parse_ini_file($path . ".ini", true);
@@ -91,7 +90,7 @@ function form_mail($form="", $function="") {
 
 
 				// create form
-				$ret .= '<form method="post">';
+				$ret .= '<div id="form_mail_form"><form method="post">';
 
 					// iterate form lines
 					foreach ($form_ini as $text => $block) {
@@ -115,7 +114,7 @@ function form_mail($form="", $function="") {
 					$ret .= '<p><input type="submit" value="absenden"></p>';
 					$ret .= '<input name="action" type="hidden" value="form_mail_send">';
 
-				$ret .= "</form>";
+				$ret .= "</form></div>";
 		}
 	}
 

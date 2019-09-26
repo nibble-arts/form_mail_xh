@@ -120,7 +120,12 @@ function form_mail_init() {
 
 		.change(function (e) {
 
+			select = jQuery('select[name="filmblock"]').attr("fields");
 			sel = jQuery('select[name="filmblock"] option:selected').text();
+
+
+			// add group field data to form
+			form_mail_insert_data(select, sel);
 
 			form_mail_show_list(sel);
 		});
@@ -130,18 +135,44 @@ function form_mail_init() {
 function form_mail_hide_lists() {
 
 	jQuery('[name^="fm_filmlist"]').hide();
+	jQuery('#form_mail_form').hide();
 }
 
 
 function form_mail_show_list(n) {
 
+	// hide form
 	form_mail_hide_lists();
-	jQuery('[name="fm_filmlist_' + n + '"]').show();
+
+	// select film list
+	jQuery('[name="fm_filmlist_' + n + '"]')
+		.show()
+		.change(function (e) {
+
+			data = jQuery(this);
+
+			form_mail_insert_data(data.find("select").attr("fields"), data.find("select option:selected").attr("value"));
+
+			jQuery('#form_mail_form').show();
+		});
 }
 
 
-function form_mail_insert_data() {
+// insert data into form
+function form_mail_insert_data(fields, values) {
 
+	fields = fields.split("|");
+	values = values.split("|");
+
+	// iterate fields
+	jQuery.each(values, function (idx) {
+
+		jQuery('*[name="'+fields[idx]+'"]')
+			.attr("value", values[idx])
+			.removeClass("form_mail_mandatory")
+			.addClass("form_mail_mand_ok");
+
+	})
 }
 
 
