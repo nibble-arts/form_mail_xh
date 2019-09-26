@@ -7,6 +7,7 @@
 
 
 define("FORM_CONTENT_BASE", $pth["folder"]["content"]);
+define("FORM_DOWNLOADS_BASE", $pth["folder"]["downloads"]);
 
 define("FORM_MAIL_BASE", $pth["folder"]["plugin"]);
 define("FORM_MAIL_PATH", $plugin_cf["form_mail"]["form_mail_path"]);
@@ -67,7 +68,7 @@ function form_mail($form="", $function="") {
 			case "administration":
 				Admin::fetch($path);
 
-				$ret .= Admin::render("titel");
+				$ret .= Admin::render($form);
 				break;
 
 

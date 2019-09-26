@@ -44,16 +44,7 @@ class Admin {
 
 	// render form data in list
 	// optional: group by field name
-	public static function render($group = false) {
-
-		// if ($group) {
-		// 	$data = self::group($group);
-		// }
-
-		// else {
-		// 	$data = self::$data;
-		// }
-
+	public static function render($form) {
 
 		$ret = "";
 		$csv = "";
@@ -97,8 +88,18 @@ class Admin {
 
 		$ret .= "</table>";
 
+
 		// save csv file
-		file_put_contents(self::$path . '/' . 'result.csv', $csv);
+		// create download directory
+		if (!file_exists(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH)) {
+			mkdir(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH, 0777, true);
+		}
+
+		// write data
+		file_put_contents(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv', $csv);
+
+		// add download link
+		$ret .= '<a href="' . FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv">Als CSV-File herunterladen</a>';
 
 		return $ret;
 	}
