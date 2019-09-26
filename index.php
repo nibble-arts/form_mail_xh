@@ -89,6 +89,8 @@ function form_mail($form="", $function="") {
 				$b = new Mail_form_block();
 
 
+				$ret .= "<hr>";
+
 				// create form
 				$ret .= '<div id="form_mail_form"><form method="post">';
 
