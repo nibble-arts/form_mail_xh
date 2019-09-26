@@ -41,7 +41,7 @@ class Form_Mail_Selector {
 
 
 			$ret .= "<p>";
-				$ret .= "Filmblock " . $this->select(array_keys($this->selection), "filmblock", ["fields" => $this->group_field]);
+				$ret .= "Programm " . $this->select(array_keys($this->selection), "filmblock", ["fields" => $this->group_field]);
 				$ret .= "<br>";
 
 
