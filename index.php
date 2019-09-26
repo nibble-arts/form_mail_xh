@@ -23,12 +23,13 @@ define("FORM_MAIL_SENT_FAIL", $plugin_tx["form_mail"]["mail_sent_fail"]);
 include_once FORM_MAIL_BASE . "lib/class.block.php";
 include_once FORM_MAIL_BASE . "lib/class.sender.php";
 include_once FORM_MAIL_BASE . "lib/class.selector.php";
+include_once FORM_MAIL_BASE . "lib/class.admin.php";
 
 
 
 // plugin to create a form and send the result to an email address
 
-function form_mail($form="", $template="") {
+function form_mail($form="", $function="") {
 
 	global $get, $admin, $action, $database, $_SESSION, $onload, $sn, $su, $f;
 
@@ -53,55 +54,72 @@ function form_mail($form="", $template="") {
 	$onload .= "form_mail_init();";
 
 
-	$ret .= '<form method="post">';
-
 	// create form definition path
 	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
 
 	if (file_exists($path . ".ini")) {
 
-		$selector = new Form_Mail_selector($path);
-		$ret .= $selector->render();
 
-		// load form definition
-		$form_ini = parse_ini_file($path . ".ini", true);
-
-		$formid = false;
-
-		$block_idx = 0;
-
-		// create global block
-		$global = new Mail_form_block();
-		$b = new Mail_form_block();
+		switch (strtolower($function)) {
 
 
-		// iterate form lines
-		foreach ($form_ini as $text => $block) {
+			// admin
+			case "administration":
+				Admin::fetch($path);
 
-			// load settings
-			if ($text == "_settings") {
-				$settings = $block;
-			}
+				$ret .= Admin::render("titel");
+				break;
 
-			// set block
-			else {
 
-				$b->set($text, $block);
-				$ret .= $b->render();
-			}
+			// show form
+			default:
 
+				$selector = new Form_Mail_selector($path);
+				// $ret .= $selector->render();
+
+				// load form definition
+				$form_ini = parse_ini_file($path . ".ini", true);
+
+				$formid = false;
+
+				$block_idx = 0;
+
+				// create global block
+				$global = new Mail_form_block();
+				$b = new Mail_form_block();
+
+
+				// create form
+				$ret .= '<form method="post">';
+
+					// iterate form lines
+					foreach ($form_ini as $text => $block) {
+
+						// load settings
+						if ($text == "_settings") {
+							$settings = $block;
+						}
+
+						// set block
+						else {
+
+							$b->set($text, $block);
+							$ret .= $b->render();
+						}
+
+					}
+
+
+					// add submit button
+					$ret .= '<p><input type="submit" value="absenden"></p>';
+					$ret .= '<input name="action" type="hidden" value="form_mail_send">';
+
+				$ret .= "</form>";
 		}
-
-
-		// add submit button
-		$ret .= '<p><input type="submit" value="absenden"></p>';
-		$ret .= '<input name="action" type="hidden" value="form_mail_send">';
-
-		$ret .= "</form>";
-
 	}
 
 	else {
+
 		$ret .= '<div class="xh_fail">Form definition not found</div>';
 	}
 

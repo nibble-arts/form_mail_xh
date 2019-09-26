@@ -50,3 +50,22 @@
 	font-weight: 500;
 	margin: 5px 0 8px 0;
 }
+
+.form_mail_list_cell {
+	border: 1px solid grey;
+	padding: 3px;
+	vertical-align: top;
+}
+
+.form_mail_list_table {
+	border: 1px solid grey;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+.form_mail_list_head {
+	writing-mode: vertical-lr;
+    white-space:nowrap;
+	text-orientation: mixed;
+	min-width: 25px;
+}

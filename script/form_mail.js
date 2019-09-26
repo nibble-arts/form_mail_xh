@@ -112,13 +112,36 @@ function form_mail_init() {
 		});
 
 
+	// hide film lists
+	form_mail_hide_lists();
 
+	// bind event on film list selection
 	jQuery('select[name="filmblock"]')
 
 		.change(function (e) {
 
-console.log(this);
+			sel = jQuery('select[name="filmblock"] option:selected').text();
+
+			form_mail_show_list(sel);
 		});
+}
+
+
+function form_mail_hide_lists() {
+
+	jQuery('[name^="fm_filmlist"]').hide();
+}
+
+
+function form_mail_show_list(n) {
+
+	form_mail_hide_lists();
+	jQuery('[name="fm_filmlist_' + n + '"]').show();
+}
+
+
+function form_mail_insert_data() {
+
 }
 
 

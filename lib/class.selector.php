@@ -23,7 +23,13 @@ class Form_Mail_Selector {
 			$ret .= "<p>";
 				$ret .= "Filmblock " . $this->select(array_keys($this->selection), "filmblock");
 				$ret .= "<br>";
-				$ret .= "Film " . $this->select([], "filme");
+
+				foreach ($this->selection as $idx => $filme) {
+					$ret .= '<p name="fm_filmlist_' . $idx . '">';
+						$ret .= "Film " . $this->select($filme, "") . '<br>';
+					$ret .= '</p>';
+				}
+
 			$ret .= "</p>";
 		}
 
@@ -36,7 +42,7 @@ class Form_Mail_Selector {
 
 		$ret = "";
 
-		$ret .= "<select name=" . $name . ">";
+		$ret .= '<select name="' . $name . '">';
 
 		foreach ($opt as $idx => $entry) {
 			$ret .= '<option value="' . $idx . '">' . $entry . '</option>';
