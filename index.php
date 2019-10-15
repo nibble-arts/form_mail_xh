@@ -21,18 +21,26 @@ define("FORM_MAIL_SENT", $plugin_tx["form_mail"]["mail_sent"]);
 define("FORM_MAIL_SENT_FAIL", $plugin_tx["form_mail"]["mail_sent_fail"]);
 
 
-include_once FORM_MAIL_BASE . "lib/class.block.php";
-include_once FORM_MAIL_BASE . "lib/class.sender.php";
-include_once FORM_MAIL_BASE . "lib/class.selector.php";
-include_once FORM_MAIL_BASE . "lib/class.admin.php";
+// init class autoloader
+spl_autoload_register(function ($path) {
+
+
+	if ($path && strpos($path, "fm\\") !== false) {
+		$path = "classes/" . str_replace("fm\\", "", strtolower($path)) . ".php";
+		include_once $path; 
+	}
+});
+
 
 
 
 // plugin to create a form and send the result to an email address
-
 function form_mail($form="", $function="") {
 
-	global $get, $admin, $action, $database, $_SESSION, $onload, $sn, $su, $f;
+	global $onload, $su, $f;
+
+
+	fm\Session::load();
 
 
 	// memberaccess integration
@@ -74,7 +82,7 @@ function form_mail($form="", $function="") {
 			// show form
 			default:
 
-				$selector = new Form_Mail_selector($path);
+				$selector = new fm\Selector($path);
 				$ret .= $selector->render("titel");
 
 				// load form definition
@@ -85,8 +93,8 @@ function form_mail($form="", $function="") {
 				$block_idx = 0;
 
 				// create global block
-				$global = new Mail_form_block();
-				$b = new Mail_form_block();
+				$global = new fm\Block();
+				$b = new fm\Block();
 
 
 				$ret .= "<hr>";
@@ -127,7 +135,7 @@ function form_mail($form="", $function="") {
 
 
 	// EXECUTE SEND ACTION
-	if (isset($_POST["action"]) && $_POST["action"] == "form_mail_send") {
+	if (fm\Session::post("action") == "form_mail_send") {
 
 
 		// no setting in form definition
@@ -142,7 +150,7 @@ function form_mail($form="", $function="") {
 			];
 		}
 
-		$sender = new FormMailSender($settings["sender"], $form);
+		$sender = new fm\Sender($settings["sender"], $form);
 		$sender->set_key_names(["Frage","Antwort"]);
 		$sender->add_data($_POST);
 
