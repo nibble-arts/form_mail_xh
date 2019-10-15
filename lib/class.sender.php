@@ -34,6 +34,7 @@ class FormMailSender {
 
 		// send mail
 		// return mail($receiver, $subject, $this->render(), $this->mail_header());
+// debug($base_dir . $this->form . "/" . $file_name);
 
 		// save to file
 		return file_put_contents($base_dir . $this->form . "/" . $file_name, $this->render());
@@ -126,7 +127,7 @@ class FormMailSender {
 		$ini .= "timestamp=" . time();
 
 		// add active user
-		if (FORM_MAIL_ACCESS_SUPPORT) {
+		if (FORM_MAIL_ACCESS_SUPPORT && ma\Access::user()) {
 			$ini .= "\n";
 			$ini .= "user=" . ma\Access::user()->username() . "\n";
 		}

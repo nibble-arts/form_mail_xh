@@ -92,7 +92,7 @@ function form_mail($form="", $function="") {
 				$ret .= "<hr>";
 
 				// create form
-				$ret .= '<div id="form_mail_form"><form method="post">';
+				$ret .= '<div id="form_mail_form"><form method="post" action="#">';
 
 					// iterate form lines
 					foreach ($form_ini as $text => $block) {
@@ -150,7 +150,6 @@ function form_mail($form="", $function="") {
 
 
 		if ($res) {
-
 			$ret_send .= '<div class="xh_info">' . FORM_MAIL_SENT . '</div>';
 		}
 		else {

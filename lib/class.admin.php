@@ -50,9 +50,13 @@ class Admin {
 		$csv = "";
 		$csv_ary = [];
 
+		$ret .= '<p>' . count(self::$data) . ' Einträge' . '</p>';
+		
 		$ret .= '<table class="form_mail_list_table">';
 
 			// create header
+			$ret .= '<th>#</th>'; // count field
+		
 			foreach (self::$legend as $value) {
 				
 				$ret .= '<th class="form_mail_list_head">';
@@ -67,23 +71,27 @@ class Admin {
 
 
 			// create lines
-			foreach (self::$data as $line) {
+			foreach (self::$data as $idx => $line) {
 
-				$ret .= "<tr>";
+				if ($line != "") {
+					$ret .= "<tr>";
 
-					foreach ($line as $value) {
+						$ret .= '<td class="form_mail_list_cell">' . $idx . '</td>';
 
-						$ret .= '<td class="form_mail_list_cell">';
-							$ret .= $value;
-						$ret .= "</td>";
+						foreach ($line as $value) {
 
-						$csv_ary[] = '"' . $value . '"';
-					}
+							$ret .= '<td class="form_mail_list_cell">';
+								$ret .= $value;
+							$ret .= "</td>";
 
-				$ret .= "<tr>";
+							$csv_ary[] = '"' . $value . '"';
+						}
 
-				$csv .= implode(";", $csv_ary) . "\n";
-				$csv_ary = [];
+					$ret .= "<tr>";
+
+					$csv .= implode(";", $csv_ary) . "\n";
+					$csv_ary = [];
+				}
 			}
 
 		$ret .= "</table>";
