@@ -43,6 +43,11 @@ function form_mail($form="", $function="") {
 	fm\Session::load();
 
 
+	// create form definition path and load entries
+	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
+	fm\Entries::load($path);
+
+
 	// memberaccess integration
 	if(class_exists("ma\Access")) {
 		define("FORM_MAIL_ACCESS_SUPPORT", true);
@@ -63,11 +68,7 @@ function form_mail($form="", $function="") {
 	$onload .= "form_mail_init();";
 
 
-	// create form definition path
-	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
-
 	if (file_exists($path . ".ini")) {
-
 
 		switch (strtolower($function)) {
 
@@ -125,6 +126,12 @@ function form_mail($form="", $function="") {
 					$ret .= '<input name="action" type="hidden" value="form_mail_send">';
 
 				$ret .= "</form></div>";
+
+
+				// list current entries
+				// fm\Entries::filter("meta:username", \ma\User()::username());
+				$ret .= fm\View::list();
+
 		}
 	}
 

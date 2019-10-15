@@ -47,4 +47,22 @@ class Entries {
 		return false;
 	}
 
+
+	// filter entries by key
+	public static function filter($key, $value) {
+
+	}
+
+
+	// sort entries by key and direction
+	public static function sort($order, $dir) {
+
+	}
+
+
+	// return count of entries
+	public static function count() {
+		return count(self::$entries);
+	}
+
 }
