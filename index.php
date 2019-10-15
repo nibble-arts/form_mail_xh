@@ -74,8 +74,8 @@ function form_mail($form="", $function="") {
 
 			// admin
 			case "administration":
-				Admin::fetch($path);
-				$ret .= Admin::render($form);
+				fm\Admin::fetch($path);
+				$ret .= fm\Admin::render($form);
 				break;
 
 
