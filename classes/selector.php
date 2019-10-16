@@ -78,10 +78,10 @@ class Selector {
 			}
 
 			if ($name) {
-				$ret .= ' name="' . $name;
+				$ret .= ' name="' . $name . '"';
 			}
 
-		$ret .= '">';
+		$ret .= '>';
 
 
 		// add empty option

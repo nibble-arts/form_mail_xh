@@ -1,6 +1,8 @@
 <?php
 
 $plugin_tx['form_mail']['forms']="Formulare";
+$plugin_tx['form_mail']['entry']="Eintrag";
+$plugin_tx['form_mail']['entries']="Einträge";
 
 $plugin_tx['form_mail']['fail_noform']="Formular \"%s\" nicht gefunden";
 $plugin_tx['form_mail']['fail_formpath']="Formular-Verzeichnis nicht gefunden";

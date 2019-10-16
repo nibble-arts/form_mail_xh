@@ -12,13 +12,6 @@ define("FORM_DOWNLOADS_BASE", $pth["folder"]["downloads"]);
 define("FORM_MAIL_BASE", $pth["folder"]["plugin"]);
 define("FORM_MAIL_PATH", $plugin_cf["form_mail"]["form_mail_path"]);
 
-// define("FORM_MAIL_MAIL_TARGET", $plugin_cf["form_mail"]["mail_target"]);
-define("FORM_MAIL_MAIL_SENDER", $plugin_cf["form_mail"]["mail_sender"]);
-define("FORM_MAIL_MAIL_ADDRESS", $plugin_cf["form_mail"]["mail_address"]);
-define("FORM_MAIL_MAIL_SUBJECT", $plugin_cf["form_mail"]["mail_subject"]);
-
-define("FORM_MAIL_SENT", $plugin_tx["form_mail"]["mail_sent"]);
-define("FORM_MAIL_SENT_FAIL", $plugin_tx["form_mail"]["mail_sent_fail"]);
 
 
 // init class autoloader
@@ -32,15 +25,13 @@ spl_autoload_register(function ($path) {
 });
 
 
+fm\Main::init($plugin_cf, $plugin_tx);
 
 
 // plugin to create a form and send the result to an email address
 function form_mail($form="", $function="") {
 
 	global $onload, $su, $f;
-
-
-	fm\Session::load();
 
 
 	// create form definition path and load entries
@@ -151,9 +142,9 @@ function form_mail($form="", $function="") {
 
 			$settings = [
 				// "target" => "",
-				"sender" => FORM_MAIL_MAIL_SENDER,
-				"address" => FORM_MAIL_MAIL_ADDRESS,
-				"subject" => FORM_MAIL_MAIL_SUBJECT
+				"sender" => fm\Config::mail_sender(),
+				"address" => fm\Config::mail_address(),
+				"subject" => fm\Config::mail_subject()
 			];
 		}
 
@@ -165,10 +156,10 @@ function form_mail($form="", $function="") {
 
 
 		if ($res) {
-			$ret_send .= '<div class="xh_info">' . FORM_MAIL_SENT . '</div>';
+			$ret_send .= '<div class="xh_info">' . fm\Text::mail_sent() . '</div>';
 		}
 		else {
-			$ret_send .= '<div class="xh_warning">' . FORM_MAIL_SENT_FAIL. '</div>';
+			$ret_send .= '<div class="xh_warning">' . fm\Text::mail_sent_fail(). '</div>';
 		}
 
 		// create remember string
