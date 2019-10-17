@@ -119,9 +119,15 @@ function form_mail($form="", $function="") {
 				$ret .= "</form></div>";
 
 
-				// list current entries
-				// fm\Entries::filter("meta:username", \ma\User()::username());
-				$ret .= fm\View::list();
+				// if logged user -> show filtered list of entries from the user
+				if (FORM_MAIL_ACCESS_SUPPORT) {
+
+					// list current entries
+					fm\Entries::filter("meta:user", \ma\Access::User()->username());
+					$ret .= fm\View::list();
+				}
+
+
 
 		}
 	}

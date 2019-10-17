@@ -67,8 +67,8 @@ class Entry {
 		// return key value
 		if ($key) {
 
-			if (isset($this->meta["key"])) {
-				return $this->mety["key"];
+			if (isset($this->meta[$key])) {
+				return $this->meta[$key];
 			}
 			else {
 				return false;

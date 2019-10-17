@@ -3,6 +3,9 @@
 $plugin_tx['form_mail']['forms']="Formulare";
 $plugin_tx['form_mail']['entry']="Eintrag";
 $plugin_tx['form_mail']['entries']="Einträge";
+$plugin_tx['form_mail']['username']="Benutzername";
+$plugin_tx['form_mail']['time']="Zeit";
+$plugin_tx['form_mail']['edit']="Eintrag bearbeiten";
 
 $plugin_tx['form_mail']['fail_noform']="Formular \"%s\" nicht gefunden";
 $plugin_tx['form_mail']['fail_formpath']="Formular-Verzeichnis nicht gefunden";

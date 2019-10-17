@@ -49,8 +49,37 @@ class Entries {
 
 
 	// filter entries by key
+	// key: meta:field, value
+	//      data:legend, value
 	public static function filter($key, $value) {
 
+		$filter = explode(":", $key);
+		$filtered = [];
+
+		// valid key
+		if (count($filter) == 2) {
+
+			foreach (self::$entries as $entry) {
+
+				switch ($filter[0]) {
+
+					case "data":
+						break;
+
+
+					// filter by meta entry
+					case "meta":
+						if ($entry->meta($filter[1]) == $value) {
+							$filtered[] = $entry;
+						}
+
+						break;
+
+				}
+			}
+		}
+
+		self::$entries = $filtered;
 	}
 
 

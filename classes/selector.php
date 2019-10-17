@@ -70,7 +70,6 @@ class Selector {
 	private function select($opt, $name, $options = false) {
 
 		$ret = "";
-
 		$ret .= '<select ';
 
 			if (isset($options["fields"])) {
@@ -96,9 +95,14 @@ class Selector {
 
 					$field = $options["format"];
 
-					if (($idx = array_search($field, explode("|", $this->fields))) !== false) {
+					// show selected field
+					if (($key = array_search($field, explode("|", $this->fields))) !== false) {
+						$value = explode("|", $entry)[$key];
+					}
 
-						$value = explode("|", $entry)[$idx];
+					// no fields defined -> show all
+					else {
+						$value = $entry;
 					}
 				}
 

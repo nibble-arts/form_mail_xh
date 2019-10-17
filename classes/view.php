@@ -12,53 +12,80 @@ class View {
 
 		$ret = '<p>' . Entries::count() . ' ' . Text::entries() . '</p>';
 		
-		$ret .= '<table class="form_mail_list_table">';
+		if (Entries::get(0)) {
 
-			// create header
-			$ret .= '<th>#</th>'; // count field
+			$ret .= '<table class="form_mail_list_table">';
 
-			foreach (Entries::get(0)->legend() as $value) {
-				
-				$ret .= '<th class="form_mail_list_head">';
-					$ret .= ucfirst(str_replace("_", " ", $value));
-				$ret .= '</th>';
+				// create header
+				$ret .= '<th>#</th>'; // count field
+				$ret .= '<th class="form_mail_list_head">' . Text::username() . '</th>'; // count field
+				$ret .= '<th class="form_mail_list_head">' . Text::time() . '</th>'; // count field
 
-				$csv_ary[] = '"' . $value . '"';
-			}
+				foreach (Entries::get(0)->legend() as $value) {
+					
+					$ret .= '<th class="form_mail_list_head">';
+						$ret .= ucfirst(str_replace("_", " ", $value));
+					$ret .= '</th>';
 
-			$csv = implode(";", $csv_ary) . "\n";
-			$csv_ary = [];
-
-
-			// create lines
-			foreach (Entries::get() as $idx => $line) {
-
-				if ($line != "") {
-					$ret .= "<tr>";
-
-						$ret .= '<td class="form_mail_list_cell">' . $idx . '</td>';
-
-						// foreach ($line as $value) {
-
-						while ($value = $line->get()) {
-
-							$ret .= '<td class="form_mail_list_cell">';
-								$ret .= $value[key($value)];
-							$ret .= "</td>";
-
-							$csv_ary[] = '"' . $value[key($value)] . '"';
-						}
-
-					$ret .= "<tr>";
-
-					$csv .= implode(";", $csv_ary) . "\n";
-					$csv_ary = [];
+					$csv_ary[] = '"' . $value . '"';
 				}
-			}
 
-		$ret .= "</table>";
+				$csv = implode(";", $csv_ary) . "\n";
+				$csv_ary = [];
+
+
+				// create lines
+				foreach (Entries::get() as $idx => $line) {
+
+					if ($line != "") {
+
+						$ret .= "<tr>";
+
+							// count row
+							$ret .= '<td class="form_mail_list_cell">';
+								$ret .= '<a href="#"';
+
+									$ret .= ' title="' . Text::edit() . '"';
+
+
+								$ret .= '>';
+								$ret .= ($idx + 1) . '</a>';
+							$ret .= '</td>';
+
+							// user
+							$ret .= '<td class="form_mail_list_cell">' . $line->meta("user") . '</td>';
+
+							// user
+							$ret .= '<td class="form_mail_list_cell">' . View::htime($line->meta("timestamp")) . '</td>';
+
+							// iterate keys
+							while ($value = $line->get()) {
+
+								$ret .= '<td class="form_mail_list_cell">';
+									$ret .= $value[key($value)];
+								$ret .= "</td>";
+
+								$csv_ary[] = '"' . $value[key($value)] . '"';
+							}
+
+						$ret .= "<tr>";
+
+						$csv .= implode(";", $csv_ary) . "\n";
+						$csv_ary = [];
+					}
+				}
+
+			$ret .= "</table>";
+		}
 
 		return $ret;
+	}
+
+
+	// show timestamp as human readable time
+	public static function htime($timestamp) {
+
+		return date("j.n.Y G:i", $timestamp);
 	}
 }
 
