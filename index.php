@@ -17,7 +17,6 @@ define("FORM_MAIL_PATH", $plugin_cf["form_mail"]["form_mail_path"]);
 // init class autoloader
 spl_autoload_register(function ($path) {
 
-
 	if ($path && strpos($path, "fm\\") !== false) {
 		$path = "classes/" . str_replace("fm\\", "", strtolower($path)) . ".php";
 		include_once $path; 
@@ -32,6 +31,9 @@ fm\Main::init($plugin_cf, $plugin_tx);
 function form_mail($form="", $function="") {
 
 	global $onload, $su, $f;
+
+	// init memberaccess integration
+	// fm\Memberaccess::init();
 
 
 	// create form definition path and load entries
@@ -119,9 +121,8 @@ function form_mail($form="", $function="") {
 				$ret .= "</form></div>";
 
 
-				// if logged user -> show filtered list of entries from the user
+				// if logged user -> show filtered list of entries from logged user
 				if (FORM_MAIL_ACCESS_SUPPORT) {
-
 					// list current entries
 					fm\Entries::filter("meta:user", \ma\Access::User()->username());
 					$ret .= fm\View::list();
