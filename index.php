@@ -122,7 +122,7 @@ function form_mail($form="", $function="") {
 
 
 				// if logged user -> show filtered list of entries from logged user
-				if (FORM_MAIL_ACCESS_SUPPORT) {
+				if (FORM_MAIL_ACCESS_SUPPORT && \ma\Access::user()) {
 					// list current entries
 					fm\Entries::filter("meta:user", \ma\Access::User()->username());
 					$ret .= fm\View::list();
@@ -172,7 +172,7 @@ function form_mail($form="", $function="") {
 		// create remember string
 		$remember = $_POST;
 		$remember["action"] = "ma_remember";
-
+debug($remember);
 		foreach ($remember as $key => $val) {
 			$rem[] = $key . "=" . $val;
 		}
