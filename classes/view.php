@@ -11,7 +11,7 @@ class View {
 
 
 		$ret = '<p>' . Entries::count() . ' ' . Text::entries() . '</p>';
-		
+
 		if (Entries::get(0)) {
 
 			$ret .= '<table class="form_mail_list_table">';
@@ -43,12 +43,9 @@ class View {
 
 							// count row
 							$ret .= '<td class="form_mail_list_cell">';
-								$ret .= '<a href="#"';
-
-									$ret .= ' title="' . Text::edit() . '"';
-
-
-								$ret .= '>';
+								// $ret .= '<a href="#"';
+									// $ret .= ' title="' . Text::edit() . '"';
+								// $ret .= '>';
 								$ret .= ($idx + 1) . '</a>';
 							$ret .= '</td>';
 
