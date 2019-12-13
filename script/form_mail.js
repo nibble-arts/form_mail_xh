@@ -134,8 +134,10 @@ function form_mail_init() {
 
 function form_mail_hide_lists() {
 
-	jQuery('[name^="fm_filmlist"]').hide();
-	jQuery('#form_mail_form').hide();
+	if (jQuery('.selector').length) {
+		jQuery('[name^="fm_filmlist"]').hide();
+		jQuery('#form_mail_form').hide();
+	}
 }
 
 

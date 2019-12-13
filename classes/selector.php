@@ -70,7 +70,7 @@ class Selector {
 	private function select($opt, $name, $options = false) {
 
 		$ret = "";
-		$ret .= '<select ';
+		$ret .= '<select class="selector"';
 
 			if (isset($options["fields"])) {
 				$ret .= ' fields="' . $options["fields"] . '"';

@@ -59,22 +59,25 @@ class Entries {
 		// valid key
 		if (count($filter) == 2) {
 
-			foreach (self::$entries as $entry) {
+			if (self::$entries) {
+				
+				foreach (self::$entries as $entry) {
 
-				switch ($filter[0]) {
+					switch ($filter[0]) {
 
-					case "data":
-						break;
+						case "data":
+							break;
 
 
-					// filter by meta entry
-					case "meta":
-						if ($entry->meta($filter[1]) == $value) {
-							$filtered[] = $entry;
-						}
+						// filter by meta entry
+						case "meta":
+							if ($entry->meta($filter[1]) == $value) {
+								$filtered[] = $entry;
+							}
 
-						break;
+							break;
 
+					}
 				}
 			}
 		}

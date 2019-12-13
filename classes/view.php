@@ -9,7 +9,6 @@ class View {
 	// render the entries as list
 	public static function list() {
 
-
 		$ret = '<p>' . Entries::count() . ' ' . Text::entries() . '</p>';
 
 		if (Entries::get(0)) {
