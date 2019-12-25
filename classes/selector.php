@@ -8,14 +8,20 @@ class Selector {
 
 	private $selection;
 	private $group_field;
+	private $field;
+	private $field_name;
 	private $fields;
+	private $fields_name;
 	private $format;
 
 
 	public function __construct($path) {
 
 		$this->group_field = false;
+		$this->field = false;
+		$this->field_name = "Feld";
 		$this->fields = false;
+		$this->fields_name = "Fields";
 		$this->selection = false;
 
 
@@ -31,6 +37,14 @@ class Selector {
 			if (isset($this->selection["_fields"])) {
 				$this->fields = $this->selection["_fields"];
 			}
+			
+			if (isset($this->selection["_field_name"])) {
+				$this->field_name = $this->selection["_field_name"];
+			}
+			
+			if (isset($this->selection["_fields_name"])) {
+				$this->fields_name = $this->selection["_fields_name"];
+			}
 		}
 	}
 
@@ -43,9 +57,8 @@ class Selector {
 
 		if ($this->selection) {
 
-
 			$ret .= "<p>";
-				$ret .= "Programm " . $this->select(array_keys($this->selection), "filmblock", ["fields" => $this->group_field]);
+				$ret .= $this->field_name . " " . $this->select(array_keys($this->selection), "filmblock", ["fields" => $this->group_field]);
 				$ret .= "<br>";
 
 
@@ -54,7 +67,7 @@ class Selector {
 					if ($idx[0] != "_") {
 
 						$ret .= '<p name="fm_filmlist_' . $idx . '">';
-							$ret .= "Film " . $this->select($filme, "", ["fields" => $this->fields, "format" => $format]) . '<br>';
+							$ret .= $this->fields_name . " " . $this->select($filme, "", ["fields" => $this->fields, "format" => $format]) . '<br>';
 						$ret .= '</p>';
 					}
 				}
