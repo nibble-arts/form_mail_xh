@@ -13,8 +13,6 @@ define ('FORM_MAIL_SAVED', $tx['message']['saved']);
 
 
 
-
-
 function form_settings($action, $admin, $plugin) {
 
 	global $plugin_tx, $o;
@@ -160,8 +158,8 @@ function form_mail_list_files($type) {
 
 
 		while (($file = readdir($handler)) != false) {
-
-			if ($file != "." && $file != "..") {
+			
+			if (pathinfo($file, PATHINFO_EXTENSION) == "ini") {
 
 				$ret .= '<li><a href="?form_mail&admin=plugin_main&action=plugin_edit:' . $type . "|" . $file . ' &normal"> ' . $file . '</a> ';
 
