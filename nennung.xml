@@ -1,8 +1,13 @@
+<!--
+VÕFA Nennformular
+CMSimple-XH form plugin
+-->
+
 <form>
 	<title>Wettbewerbs-Nennung</title>
 	<select name="region" source="file:regionen"></select>
 	
-	<div name="data" hide="region == "">
+	<div name="data" hide="region">
 		
 		<div name="person" legend="Autor">
 			<input name="author" source="memberaccess:name" readonly/>
