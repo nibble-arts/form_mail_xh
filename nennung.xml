@@ -1,0 +1,42 @@
+<form>
+	<title>Wettbewerbs-Nennung</title>
+	<select name="region" source="file:regionen"></select>
+	
+	<div name="data" hide="region == "">
+		
+		<div name="person" legend="Autor">
+			<input name="author" source="memberaccess:name" readonly/>
+			<input name="email" source="memberaccess:email"/>
+			<input name="user" source="database:user@actor=memberaccess.user"/>
+		</div>
+		
+		<div name="new_film" legend="Film">
+			
+			<subtitle>Neuen Film ablegen</subtitle>
+			
+			<input name="title” mandatory="new_film" check="count:3"/>
+			<input name="time" check="regex:[0-9]+" mandatory="new_film"/>
+			<textarea name="abstract" mandatory/>
+			
+			<checkbox name="fsk0"/>
+			
+			<radio name="format" mandatory="new_film">
+				<option>UHD - 3840x2160</option>
+				<option>HD - 1920x1080</option>
+				<option>SD - 720x576</option>
+			</radio>
+			
+			<radio name="file" mandatory="new_film">
+				<option>USB-Stick</option>
+				<option>Upload</option>
+			</radio>
+			
+			<submit name="new_film" target="database:film">Film ablegen</submit>
+			
+		</div>
+		
+		<select name="film" source="data:autor@film"/>
+		
+		<submit name="nennen">Absenden</submit>
+	</div>
+</form>
