@@ -1,4 +1,4 @@
-# form-plugin
+# CMSimple-XH Form-Plugin
 The form plugin for the CMSpimle-XH framework offers a simple way to create forms, input data and send the result by mail, to a database backend or save it as a file.
 
 The form is defined and stored in the admin backend and used with a simple plugin call on a page.
@@ -10,7 +10,7 @@ The form file contains a HTML code. Tags can be defined by adding a class, whitc
 
 Each class gets the string and returns the altered string.
 
-## classes:
+## Tag-Classes
 
 ### form
 The form tag calls the basic class to define a form area. There can be multiple form areas, which also can be nested.
@@ -53,11 +53,11 @@ Creates a text entry field. The check expressions are used for mandatory checkin
 count:n -> minimum n characters needed
 regex: regular expression
 
-### mandatory
+#### mandatory
 If added, the field has to be filled and
 fulfill the format check.
 
-### hide
+#### hide
 	<... hide="name|!name|=value|!=value" ...>
 The hide attribute checks the content of the field by name. This function makes it possible to structure the form and show parts depending on the input.
 	name -> hide if the field is not empty
@@ -67,3 +67,19 @@ The hide attribute checks the content of the field by name. This function makes 
 Two or more comparisons can linked using || for a boolean or and && for a boolean and.
 
 If the name of a form block is used, all mandatory children forks have to be true.
+
+# File Structure
+	* content
+	* * plugins
+	* * * form
+	* * * * form_name.xml
+	* * * * ...
+	
+	* plugins
+	* * form
+	* * * tag_classes
+	* * * * checkbox.php
+	* * * * form.php
+	* * * * input.php
+	* * * * select.php
+	* * * * radio.php
