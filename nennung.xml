@@ -3,19 +3,19 @@ VÕFA Nennformular
 CMSimple-XH form plugin
 -->
 
-<form>
+<form target="file:nennung">
 	<title>Wettbewerbs-Nennung</title>
 	<select name="region" source="file:regionen"></select>
 	
 	<div name="data" hide="region">
 		
-		<div name="person" legend="Autor">
-			<input name="author" source="memberaccess:name" readonly/>
-			<input name="email" source="memberaccess:email"/>
+		<form name="person" legend="Autor">
+			<input name="author" source="memberaccess:name" readonly mandatory/>
+			<input name="email" source="memberaccess:email" mandatory/>
 			<input name="user" source="database:user@actor=memberaccess.user"/>
-		</div>
+		</form>
 		
-		<div name="new_film" legend="Film">
+		<form name="new_film" target="database:film" legend="Film">
 			
 			<subtitle>Neuen Film ablegen</subtitle>
 			
@@ -36,11 +36,11 @@ CMSimple-XH form plugin
 				<option>Upload</option>
 			</radio>
 			
-			<submit name="new_film" target="database:film">Film ablegen</submit>
+			<submit>Film ablegen</submit>
 			
-		</div>
+		</form>
 		
-		<select name="film" source="data:autor@film"/>
+		<select name="film" source="database:actor=$author@film"/>
 		
 		<submit name="nennen">Absenden</submit>
 	</div>
