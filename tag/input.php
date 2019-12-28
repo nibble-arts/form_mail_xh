@@ -2,7 +2,7 @@
 
 namespace form\tag;
 
-class Input {
+class Form extends Tag {
 	
 	public static function parse($html) {
 		

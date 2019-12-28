@@ -49,15 +49,15 @@ The checkbox class creates a single checkbox.
 	<input name="name_in_post" [check="check_expression"] [source="source_expression"]/>
 Creates a text entry field. The check expressions are used for mandatory checking. 
 
-#### check expressions
+#### check expressions (JavaScript)
 count:n -> minimum n characters needed
 regex: regular expression
 
-#### mandatory
+#### mandatory (JavaScript)
 If added, the field has to be filled and
 fulfill the format check.
 
-#### hide
+#### hide (JavaScript)
 	<... hide="name|!name|=value|!=value" ...>
 The hide attribute checks the content of the field by name. This function makes it possible to structure the form and show parts depending on the input.
 	name -> hide if the field is not empty

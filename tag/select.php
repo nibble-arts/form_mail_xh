@@ -2,7 +2,7 @@
 
 namespace form\tag;
 
-class Select {
+class Select extends Tag {
 	
 	public static function parse($html) {
 		
