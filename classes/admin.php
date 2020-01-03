@@ -38,19 +38,19 @@ class Admin {
 
 		// save csv file
 		// create download directory
-		if (!file_exists(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH)) {
-			mkdir(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH, 0777, true);
+		if (!file_exists(FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH)) {
+			mkdir(FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH, 0777, true);
 		}
 
 		// write data
-		file_put_contents(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result_utf8.csv', $csv);
+		file_put_contents(FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result_utf8.csv', $csv);
 
-		file_put_contents(FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv', mb_convert_encoding($csv, "Windows-1252"));
+		file_put_contents(FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv', mb_convert_encoding($csv, "Windows-1252"));
 
 		// add download link
-		$ret .= '<p><a href="' . FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv">Als CSV-File herunterladen</a></p>';
+		$ret .= '<p><a href="' . FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result.csv">Als CSV-File herunterladen</a></p>';
 
-		$ret .= '<p><a href="' . FORM_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result_utf8.csv">Als UTF-8 kodiertes CSV-File herunterladen</a></p>';
+		$ret .= '<p><a href="' . FORM_MAIL_DOWNLOADS_BASE . FORM_MAIL_PATH . '/' . $form . '_result_utf8.csv">Als UTF-8 kodiertes CSV-File herunterladen</a></p>';
 
 		return $ret;
 	}

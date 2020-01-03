@@ -24,7 +24,7 @@ class Sender {
 	public function send($receiver, $subject) {
 
 
-		$base_dir = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/";
+		$base_dir = FORM_MAIL_CONTENT_BASE . FORM_MAIL_PATH . "/";
 
 		// create dir if not exists
 		if (!file_exists($base_dir . $this->form)) {

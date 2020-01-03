@@ -6,8 +6,8 @@
 }*/
 
 
-define("FORM_CONTENT_BASE", $pth["folder"]["content"]);
-define("FORM_DOWNLOADS_BASE", $pth["folder"]["downloads"]);
+define("FORM_MAIL_CONTENT_BASE", $pth["folder"]["content"]);
+define("FORM_MAIL_DOWNLOADS_BASE", $pth["folder"]["downloads"]);
 
 define("FORM_MAIL_BASE", $pth["folder"]["plugin"]);
 define("FORM_MAIL_PATH", $plugin_cf["form_mail"]["form_mail_path"]);
@@ -37,7 +37,7 @@ function form_mail($form="", $function="") {
 
 
 	// create form definition path and load entries
-	$path = FORM_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
+	$path = FORM_MAIL_CONTENT_BASE . FORM_MAIL_PATH . "/" . $form;
 	fm\Entries::load($path);
 
 
